@@ -56,7 +56,7 @@ class gluster::repo::apt (
     $repo_ver = $version
   } elsif $version =~ /^\d\.\d+$/ {
     $repo_ver = "${version}/LATEST"
-  } elsif $version =~ /^\d\.\d+\-\d+$/ {
+  } elsif $version =~ /^(\d)\.(\d+)\-\d+$/ {
     $repo_ver =  "${1}.${2}"
   } elsif $version =~ /^(\d)\.(\d+)\.(\d+).*$/ {
     $repo_ver =  "${1}.${2}/${1}.${2}.${3}"
