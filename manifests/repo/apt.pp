@@ -56,6 +56,8 @@ class gluster::repo::apt (
     $repo_ver = $version
   } elsif $version =~ /^\d\.\d+$/ {
     $repo_ver = "${version}/LATEST"
+  } elsif $version =~ /^\d\.\d+\-\d+$/ {
+    $repo_ver =  "${1}"
   } elsif $version =~ /^(\d)\.(\d+)\.(\d+).*$/ {
     $repo_ver =  "${1}.${2}/${1}.${2}.${3}"
   } else {
@@ -73,9 +75,9 @@ class gluster::repo::apt (
             default      => false,
           }
           if versioncmp($release, '3.12') < 0 {
-            $repo_url  = "https://download.gluster.org/pub/gluster/glusterfs/${release}/${version}/Debian/${::lsbdistcodename}/apt/"
+            $repo_url  = "https://download.gluster.org/pub/gluster/glusterfs/${release}/${repo_ver}/Debian/${::lsbdistcodename}/apt/"
           } else {
-            $repo_url  = "https://download.gluster.org/pub/gluster/glusterfs/${release}/${version}/Debian/${::lsbdistcodename}/${arch}/apt/"
+            $repo_url  = "https://download.gluster.org/pub/gluster/glusterfs/${release}/${repo_ver}/Debian/${::lsbdistcodename}/${arch}/apt/"
           }
         }
       }
